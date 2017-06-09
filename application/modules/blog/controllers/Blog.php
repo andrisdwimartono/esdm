@@ -103,7 +103,7 @@ class Blog extends MX_Controller
         $crud->change_field_type('path', 'hidden');
         $crud->change_field_type('id_user', 'hidden');
         $crud->unset_columns('content', 'path');
-        $crud->columns('title', 'Categories', 'id_user', 'created_at');
+        $crud->columns('title', 'Categories', 'id_user', 'created_at', 'publish_time', 'expired_time');
         $crud->set_relation_n_n('Categories', 'categories_blogs', 'category', 'id_blog', 'id_category', 'category');
         $crud->callback_before_insert(array($this, 'savePath'));
         $crud->callback_before_update(array($this, 'savePath'));
@@ -125,7 +125,7 @@ class Blog extends MX_Controller
 
     public function linkBlog($value, $row)
     {
-    	return '<a href="' . site_url('blog/read/' . $row->path . '/' . $row->id) . '" title="' . $value .'">' . $value . '</a>';
+    	return '<a href="' . site_url('blog/read/' . $row->path . '/' . $row->id_blog) . '" title="' . $value .'">' . $value . '</a>';
     }
 
     public function savePath($post_array, $primary_key = null)
