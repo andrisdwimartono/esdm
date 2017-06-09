@@ -1,0 +1,1 @@
+[29-Apr-2017 17:35:50 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on a non-object in /home/adipatik/public_html/esdm/application/models/Grocery_crud_model.php on line 87

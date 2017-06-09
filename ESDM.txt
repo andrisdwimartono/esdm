@@ -1,0 +1,17 @@
+esdm
+
+Halaman awal:
+pivot/Pivot%202.0.2/index-fullscreen-menu.html
+
+esdm.jabarprov.go.id
+
+
+halaman awal
+index-fullscreen-menu.html
+home-5.html
+
+paralax
+home-resume.html
+
+blog
+blog-masonry.html
