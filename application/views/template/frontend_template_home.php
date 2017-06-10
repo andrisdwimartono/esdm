@@ -96,7 +96,7 @@
 					
 				</div><!--end of container-->
 				<div>
-						<font color="black"><marquee style="background-color:rgb(168, 255, 132);"><p><?php echo $running_text?></p></marquee></font>
+						<font color="black"><marquee style="background-color:rgb(168, 255, 132);"><p><?php echo ($running_text[0]->content);?></p></marquee></font>
 					</div>
 				</nav>
 		</div>

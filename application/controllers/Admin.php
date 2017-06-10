@@ -660,7 +660,6 @@ class Admin extends MX_Controller
 			
 			//Running Text
 //            $template_data['running_text'] = $this->RunningTextModel->getRunningText();
-            $data['running_text'] = 'asdasdsa';
 			
             // Template
             if ($data['content']->template == 'backend') {
@@ -683,6 +682,9 @@ class Admin extends MX_Controller
 						'model' => $model,
 						'pagination' => $this->pagination->create_links()
 					];
+					$template_data['running_text'] = $this->RunningTextModel->getRunningText();
+					
+					
 					//tambahan
 				}
 				//tambahan
