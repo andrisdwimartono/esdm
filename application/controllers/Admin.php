@@ -43,7 +43,7 @@ class Admin extends MX_Controller
         $this->load->library('output_view');
         $this->load->helper('utility_helper');
 		$this->load->helper('debug_helper');
-		
+		$this->load->model('media/RunningTextModel');	
         // Site
         $site = $this->config->item('site');
         $this->title = $site['title'];
@@ -657,7 +657,11 @@ class Admin extends MX_Controller
             if ($data['content']->description != '') {
                 $this->output_view->set_schema('og:description', $data['content']->description);
             }
-
+			
+			//Running Text
+//            $template_data['running_text'] = $this->RunningTextModel->getRunningText();
+            $data['running_text'] = 'asdasdsa';
+			
             // Template
             if ($data['content']->template == 'backend') {
                 $template = $this->admin_template;

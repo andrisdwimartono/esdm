@@ -93,8 +93,12 @@
 						<i class="icon icon_menu"></i>
 					</div>
 					
+					
 				</div><!--end of container-->
-			</nav>
+				<div>
+						<font color="black"><marquee style="background-color:rgb(168, 255, 132);"><p><?php echo $running_text?></p></marquee></font>
+					</div>
+				</nav>
 		</div>
 				
 		<div class="nav-container">
