@@ -23,6 +23,7 @@ class Admin extends MX_Controller
     // Template
     private $admin_template;
     private $front_template;
+	private $frontend_template;
     private $auth_template;
 
     // Auth view
@@ -52,6 +53,7 @@ class Admin extends MX_Controller
         $template = $this->config->item('template');
         $this->admin_template = $template['backend_template'];
         $this->front_template = $template['front_template'];
+		$this->frontend_template = 'template/frontend_template';
         $this->auth_template = $template['auth_template'];
 
         // Auth view
@@ -623,7 +625,7 @@ class Admin extends MX_Controller
         last_url('set'); // save last url
         $this->db->where('slug', $slug);
         $data['content'] = $this->db->get('page')->row();
-
+		//var_dump($data['content']);die();
         if ($data['content']) {
             $template_data['judul'] = $data['content']->title;
             if ($data['content']->breadcrumb != 'null') {
@@ -661,7 +663,25 @@ class Admin extends MX_Controller
                 $template = $this->admin_template;
                 $this->output_view->auth();
             } else {
-                $template = $this->front_template;
+				$template = $this->front_template;
+				//tambahan
+				if($data['content']->slug == 'home'){
+					$template = 'template/frontend_template_home';
+					//tambahan
+					$this->load->library('pagination');
+					$this->load->model('blogModel');
+					$this->load->model('categoryModel');
+
+					$this->db->join('users', 'blog.id_user = users.id', 'left');
+					$model = $this->blogModel->search(null, $this->limit, $offset);
+					$count = $this->blogModel->count();
+					$template_data = [
+						'model' => $model,
+						'pagination' => $this->pagination->create_links()
+					];
+					//tambahan
+				}
+				//tambahan
             }
 
             // View wrapper
@@ -670,7 +690,8 @@ class Admin extends MX_Controller
             } else {
                 $this->output_view->set_wrapper('page', 'page/'.$data['content']->view, $data);
             }
-
+			
+			
             $this->output_view->output($template, $template_data);
         } else {
             show_404();

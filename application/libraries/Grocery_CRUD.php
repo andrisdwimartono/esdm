@@ -2266,11 +2266,13 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 					$this->set_js_lib($this->default_texteditor_path.'/ckeditor/ckeditor.js');
 					$this->set_js_lib($this->default_texteditor_path.'/ckeditor/adapters/jquery.js');
 					$this->set_js_config($this->default_javascript_path.'/jquery_plugins/config/jquery.ckeditor.config.js');
+					$input = "<textarea id='field-{$field_info->name}' name='{$field_info->name}' class='$class_name' >$value</textarea>";
 				break;
 
 				case 'tinymce':
 					$this->set_js_lib($this->default_texteditor_path.'/tiny_mce/jquery.tinymce.js');
 					$this->set_js_config($this->default_javascript_path.'/jquery_plugins/config/jquery.tine_mce.config.js');
+					$input = "<textarea id='field-{$field_info->name}' name='{$field_info->name}' class='$class_name' >$value</textarea>";
 				break;
 
 				case 'markitup':
@@ -2279,6 +2281,7 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 
 					$this->set_js_lib($this->default_texteditor_path.'/markitup/jquery.markitup.js');
 					$this->set_js_config($this->default_javascript_path.'/jquery_plugins/config/jquery.markitup.config.js');
+					$input = "<textarea id='field-{$field_info->name}' name='{$field_info->name}' class='$class_name' >$value</textarea>";
 				break;
 			}
 

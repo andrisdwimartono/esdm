@@ -17,7 +17,9 @@ class Blog extends MX_Controller
 
         $this->title = 'Blog';
         $this->front_template = 'template/front_template';
+		$this->frontend_template = 'template/frontend_template';
         $this->admin_template = 'template/admin_template';
+		$this->administrator_template = 'template/administrator_template';
     }
 
     public function index($offset = 0)
@@ -81,7 +83,7 @@ class Blog extends MX_Controller
 	    	'categories' => $category
     	];
 
-        $this->output_view->set_title($this->title . ' : ' . $model->title);
+        $this->output_view->set_title($model->title);
         $this->output_view->set_wrapper('page', 'read', $data);
         $this->output_view->output($this->front_template);
     }
@@ -102,6 +104,8 @@ class Blog extends MX_Controller
         }
         $crud->change_field_type('path', 'hidden');
         $crud->change_field_type('id_user', 'hidden');
+		$crud->change_field_type('content', 'Textarea');
+		
         $crud->unset_columns('content', 'path');
         $crud->columns('title', 'Categories', 'id_user', 'created_at', 'publish_time', 'expired_time');
         $crud->set_relation_n_n('Categories', 'categories_blogs', 'category', 'id_blog', 'id_category', 'category');

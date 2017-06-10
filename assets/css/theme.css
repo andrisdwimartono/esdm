@@ -874,7 +874,7 @@ header .btn:last-child {
   right: 1px;
 }
 header.title {
-  height: 565px;
+  height: 350px;
   position: relative;
   overflow: hidden;
 }

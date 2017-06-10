@@ -7,7 +7,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<h1 class="text-white"><?php echo $model->title ?></h1>
-						<span class="sub alt-font text-white"><?php foreach ($categories as $key => $value): echo $key != 0 ? ', ' : ''; echo $value->category; endforeach ?> - <?php echo $model->created_at ?> - 3 Minute Read</span>
+						<span class="sub alt-font text-white"><?php foreach ($categories as $key => $value): echo $key != 0 ? ', ' : ''; echo $value->category; endforeach ?> - <?php echo $model->created_at ?></span>
 					</div>
 				</div>
 			</div>
