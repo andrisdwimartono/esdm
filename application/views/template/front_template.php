@@ -38,6 +38,7 @@
 	<script src="assets/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
+
     	<div class="loader">
     		<div class="spinner">
 			  <div class="double-bounce1"></div>

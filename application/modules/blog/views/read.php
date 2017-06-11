@@ -46,11 +46,16 @@
 					</ul>
 					</div>
 				</div>
+				
+				<div class="fb-share-button" data-href="<?php echo $url_path; ?>" data-layout="box_count" data-size="small" data-mobile-iframe="true">
+					<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Bagikan</a>
+				</div>
 				<div class="col-sm-8">
 					<div class="article-body">
 						<?php echo $model->content ?>
 					</div>
 				</div>
+				
 			</div>
 			<div class="row">
 				<div class="col-md-8 col-md-offset-3 col-sm-10 col-sm-offset-1">

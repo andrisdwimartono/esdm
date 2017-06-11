@@ -80,7 +80,8 @@ class Blog extends MX_Controller
     	$category = $this->categoryModel->search(['id_blog' => $id]);
     	$data = [
 	    	'model' => $model,
-	    	'categories' => $category
+	    	'categories' => $category,
+			'url_path' => base_url().'blog/read/'.$path.'/'.$id
     	];
 
         $this->output_view->set_title($model->title);
@@ -104,9 +105,13 @@ class Blog extends MX_Controller
         }
         $crud->change_field_type('path', 'hidden');
         $crud->change_field_type('id_user', 'hidden');
-		$crud->change_field_type('content', 'Textarea');
+		$crud->change_field_type('title', 'input');
 		
-        $crud->unset_columns('content', 'path');
+		$crud->change_field_type('publish_time', 'datetime');
+		$crud->change_field_type('status', 'enum');
+        $crud->change_field_type('content', 'text');
+		$crud->unset_columns('content', 'path');
+		$crud->unset_jquery();
         $crud->columns('title', 'Categories', 'id_user', 'created_at', 'publish_time', 'expired_time');
         $crud->set_relation_n_n('Categories', 'categories_blogs', 'category', 'id_blog', 'id_category', 'category');
         $crud->callback_before_insert(array($this, 'savePath'));
@@ -118,7 +123,7 @@ class Blog extends MX_Controller
 
         $template_data['grocery_css'] = $data['css_files'];
         $template_data['grocery_js'] = $data['js_files'];
-        $template_data['judul'] = 'Blog Starter';
+        $template_data['judul'] = 'New Content like Berita, Pengumuman, etc.';
         $template_data['crumb'] = [
             'Blog' => '',
         ];
