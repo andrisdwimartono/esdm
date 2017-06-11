@@ -38,6 +38,16 @@
 	<script src="assets/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+				  var js, fjs = d.getElementsByTagName(s)[0];
+				  if (d.getElementById(id)) return;
+				  js = d.createElement(s); js.id = id;
+				  js.src = "//connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.9";
+				  fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+		</script>
+				<!-- fb share jdk-->
     	<div class="loader">
     		<div class="spinner">
 			  <div class="double-bounce1"></div>
@@ -92,15 +102,12 @@
 					<div class="mobile-toggle">
 						<i class="icon icon_menu"></i>
 					</div>
-					<div>
-						<marquee style="background:WHITE" >
-							Some text here Some text here Some text here Some text here <img src="http://www.etutoriale.ro/banners/88x31.gif" width="88" height="31" alt="Tutorials " border="0">
-							&nbsp;
-							Some text here Some text here Some text here Some text here <img src="http://www.etutoriale.ro/banners/88x31.gif" width="88" height="31" alt="Tutorials " border="0">
-						</marquee>
+
+					</div><!--end of container-->
+				<div>
+						<font color="black"><marquee style="background-color:rgb(168, 255, 132);"><p><?php echo ($running_text[0]->content);?></p></marquee></font>
 					</div>
-				</div><!--end of container-->
-			</nav>
+				</nav>
 		</div>
 				
 		<div class="nav-container">
@@ -223,61 +230,6 @@
 			<?php echo $this->output_view->get_wrapper('page') ?>
 		</div>
 		
-		<div id="map" ></div>
-
-<script>
-function initMap() {
-var mapProp= {
-    center:new google.maps.LatLng(-6.941846, 107.654676),
-    zoom:12
-};
-var map=new google.maps.Map(document.getElementById("map"),mapProp);
-//var infoWindow = new google.maps.InfoWindow;
-
-
-              var id = "1";
-              var name = "Dinas Energi & Sumber Daya Mineral Provinsi\nJawa Barat\nDinas Esdm Prov Jabar";
-              var address = "Bandung Kulon Jl. Soekarno Hatta No.576, Sekejati, Buahbatu, Kota Bandung, Jawa Barat 40286";
-              var point = new google.maps.LatLng(
-                  parseFloat(-6.941846),
-                  parseFloat(107.654676));
-
-              var infowincontent = document.createElement('div');
-              var strong = document.createElement('strong');
-              strong.textContent = name
-              infowincontent.appendChild(strong);
-              infowincontent.appendChild(document.createElement('br'));
-
-              var text = document.createElement('text');
-              text.textContent = address
-              infowincontent.appendChild(text);
-              var icon = {};
-//              var marker = new google.maps.Marker({
-//                map: map,
-//                position: point
-//              });
-			  
-			  var marker = new google.maps.Marker({
-                map: map,
-                position: point,
-                       title: name   
-                });
-//				marker.info = new google.maps.InfoWindow({
-//				  content: '<IMG BORDER="0" ALIGN="Left" SRC="<?php echo base_url('assets/img/logo/logo-light.png');?>"><br>' + address
-//				});
-
-				var infoWindow = new google.maps.InfoWindow({
-				  content: '<IMG BORDER="0" ALIGN="Left" SRC="<?php echo base_url('assets/img/logo/logo-light.png');?>"><br>' + address
-				});
-				
-				marker.info = infoWindow;
-			  
-                infoWindow.open(map, marker);
-
-}
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGv0vvm-KiNWiqeMCKDutBN3DQMa_vOFE&callback=initMap"></script>
 		
 		
 		<?php
