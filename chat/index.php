@@ -155,7 +155,9 @@ function sudah_login(){
 	</div>
 </div>
 </body>
+<!-- copyright @jagocoding.com -->
 </html>
 <?php  
+//copyright @jagocoding.com
 }
 ?>
