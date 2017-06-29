@@ -54,6 +54,94 @@
 					<div class="article-body">
 						<?php echo $model->content ?>
 					</div>
+						<?php 
+						foreach($comments as $comment){
+							$accepting = '';
+							if($this->ion_auth->logged_in() && $comment->comment_state == 'deleted'){
+								$accepting = '<br><a class="comment-ok" href="../../../blog/accept_comment/'.$comment->comment_id.'/'.$comment->id_blog.'/accepted">Accept</a>';
+							}elseif($this->ion_auth->logged_in() && $comment->comment_state == 'accepted'){
+								$accepting = '<br><a class="comment-no" href="../../../blog/accept_comment/'.$comment->comment_id.'/'.$comment->id_blog.'/deleted">Delete</a><a class="comment-reply" id="reply-comment-'.$comment->comment_id.'" href="#rep" onclick="document.getElementById(\'reply-comment-form-'.$comment->comment_id.'\').style.display = \'unset\';">Reply</a>';
+							}elseif($this->ion_auth->logged_in() && $comment->comment_state == 'waiting'){
+								$accepting = '<br><a class="comment-ok" href="../../../blog/accept_comment/'.$comment->comment_id.'/'.$comment->id_blog.'/accepted">Accept</a> <a class="comment-no" href="../../../blog/accept_comment/'.$comment->comment_id.'/'.$comment->id_blog.'/deleted">Delete</a>';
+							}
+							
+							$comme = $comment->comment_body;
+							if($comment->comment_state == 'waiting'){
+								if(!$this->ion_auth->logged_in()){
+									$comme = '<font color="#a8bf00">Komentar menunggu moderasi</font>';
+								}else{
+									$comme .= '<br><font color="#a8bf00">Komentar menunggu moderasi</font>';
+								}
+							}elseif($comment->comment_state == 'deleted'){
+								if(!$this->ion_auth->logged_in()){
+									$comme = '<font color="#cc2702">Komentar dihapus oleh admin</font>';
+								}else{
+									$comme .= '<br><font color="#cc2702">Komentar dihapus oleh admin</font>';
+								}
+							}
+							$date=date_create($comment->comment_created);
+							echo '<div class="comment-body">'.'<div class="comment-name">'.$comment->comment_name.' pada '.date_format($date,"d M Y H:i:s").'</div>'.
+							$comme.'<div class="act-comment">'.$accepting.'</div></div><br>';
+							echo '';
+							?>
+							<div class="comment-form"  style="display:none;" id="reply-comment-form-<?php echo $comment->comment_id;?>">
+								<form action="../../insert_comment_reply/<?php echo $model->id_blog;?>" method="post">
+								<label>Balas Komentar</label>
+								<input class="form-name validate-required comment-input" type="text" placeholder="Nama" name="comment_name"><br>
+								<input class="form-email validate-required validate-email comment-input" type="text" placeholder="Email" name="comment_email"><br>
+								<input class="form-message validate-required" type="text" name="comment_message" placeholder="Pesan" style="height:125px;"><br>
+								<input type="hidden" name="comment_parent" value="<?php echo $comment->comment_id;?>">
+								<div class="submit-comment"><input type="submit" class="send-form btn-filled" value="Kirim"></div>
+								<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+								</form>
+							</div>
+							<?php 
+							//comment reply
+								foreach($comments_replies as $comment_reply){
+									if($comment_reply->parent_id == $comment->comment_id){
+										$accepting = '';
+										if($this->ion_auth->logged_in() && $comment_reply->comment_state == 'deleted'){
+											$accepting = '<br><a class="comment-ok" href="../../../blog/accept_comment/'.$comment_reply->comment_id.'/'.$comment_reply->id_blog.'/accepted">Accept</a>';
+										}elseif($this->ion_auth->logged_in() && $comment_reply->comment_state == 'accepted'){
+											$accepting = '<br><a class="comment-no" href="../../../blog/accept_comment/'.$comment_reply->comment_id.'/'.$comment_reply->id_blog.'/deleted">Delete</a>';
+										}elseif($this->ion_auth->logged_in() && $comment_reply->comment_state == 'waiting'){
+											$accepting = '<br><a class="comment-ok" href="../../../blog/accept_comment/'.$comment_reply->comment_id.'/'.$comment_reply->id_blog.'/accepted">Accept</a> <a class="comment-no" href="../../../blog/accept_comment/'.$comment_reply->comment_id.'/'.$comment_reply->id_blog.'/deleted">Delete</a>';
+										}
+										
+										$comme = $comment_reply->comment_body;
+										if($comment_reply->comment_state == 'waiting'){
+											if(!$this->ion_auth->logged_in()){
+												$comme = '<font color="#a8bf00">Komentar menunggu moderasi</font>';
+											}else{
+												$comme .= '<br><font color="#a8bf00">Komentar menunggu moderasi</font>';
+											}
+										}elseif($comment_reply->comment_state == 'deleted'){
+											if(!$this->ion_auth->logged_in()){
+												$comme = '<font color="#cc2702">Komentar dihapus oleh admin</font>';
+											}else{
+												$comme .= '<br><font color="#cc2702">Komentar dihapus oleh admin</font>';
+											}
+										}
+										$date=date_create($comment_reply->comment_created);
+										echo '<div class="comment-body-reply">'.'<div class="comment-name">'.$comment_reply->comment_name.' pada '.date_format($date,"d M Y H:i:s").'</div>'.
+										$comme.'<div class="act-comment">'.$accepting.'</div></div><br>';
+										echo '';
+								?>
+						<?php
+									}
+								}
+							}
+						?>
+						<div class="comment-form">
+							<form action="../../insert_comment/<?php echo $model->id_blog;?>" method="post">
+							<label>Isi Komentar</label>
+							<input class="form-name validate-required comment-input" type="text" placeholder="Nama" name="comment_name">
+							<input class="form-email validate-required validate-email comment-input" type="text" placeholder="Email" name="comment_email">
+							<input class="form-message validate-required" type="text" name="comment_message" placeholder="Pesan" style="height:125px;">
+							<div class="submit-comment"><input type="submit" class="send-form btn-filled" value="Kirim"></div>
+							<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+							</form>
+						</div>
 				</div>
 				
 			</div>

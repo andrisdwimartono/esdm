@@ -105,7 +105,13 @@
 
 					</div><!--end of container-->
 				<div>
-						<font color="black"><marquee style="background-color:rgb(168, 255, 132);"><p><?php echo ($running_text[0]->content);?></p></marquee></font>
+						<font color="black"><marquee style="background-color:rgb(255, 255, 255, 0.4);">
+							<p>
+								<?php if(count($running_text)>0){foreach($running_text as $rt){
+									echo $rt->content.'&nbsp;&nbsp;&nbsp;&nbsp;';
+								}}?>
+							</p>
+						</marquee></font>
 					</div>
 				</nav>
 		</div>
@@ -206,17 +212,17 @@
 					<div class="projects-container">
 						<?php foreach ($model as $key => $value): ?>
 						<?php $categories = $this->db->query("SELECT category FROM categories_blogs join category ON category.id=categories_blogs.id_category where id_blog = ".$value->id_blog)->result(); ?>
-						<div class="col-md-5 col-sm-12 no-pad project <?php foreach ($categories as $k => $v): echo $k != 0 ? ' ' : ''; echo $v->category; endforeach ?> image-holder" style="align:center">
+						<div class="col-md-12 col-sm-12 no-pad project <?php foreach ($categories as $k => $v): echo $k != 0 ? ' ' : ''; echo $v->category; endforeach ?> image-holder" style="margin:0px 0px 0px 0px;">
 							<div class="background-image-holder">
 								<img class="background-image" alt="Background Image" src="/esdm/assets/img/content/project1.jpg">
 							</div>
 							<div class="hover-state">
-								<div class="align-vertical">
+								<div class="align-vertical" style="text-align:center">
 									<h1 class="text-white"><strong><?php echo $value->title ?></strong></h1>
-									<p class="text-white"><!-- ?php echo $value->created_at  echo $value->username?-->
-										<?php echo strlen($value->content) > 50 ? substr($value->content, 0, 200) . '...' : $value->content ?>
-									</p>
 									<a href="<?php echo site_url('blog/read/' . $value->path . '/' . $value->id_blog) ?>" title="<?php echo $value->title ?>" class="btn btn-primary btn-white">Baca</a>
+									<p class="text-white"><!-- ?php echo $value->created_at  echo $value->username?-->
+										<?php echo strlen($value->content) > 50 ? str_replace('<img', '&lt;img', substr($value->content, 0, 200)) . '...' : str_replace('<img', '&lt;img', $value->content); ?>
+									</p>
 								</div>
 							</div>
 						</div>

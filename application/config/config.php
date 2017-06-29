@@ -396,7 +396,8 @@ $config['cookie_httponly'] 	= FALSE;
 |          for backwards compatibility purposes!
 |
 */
-$config['global_xss_filtering'] = TRUE;
+//sudah diganti untuk ckeditor
+$config['global_xss_filtering'] = false;
 
 /*
 |--------------------------------------------------------------------------

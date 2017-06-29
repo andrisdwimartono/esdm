@@ -674,9 +674,12 @@ class Admin extends MX_Controller
 					$this->load->library('pagination');
 					$this->load->model('blogModel');
 					$this->load->model('categoryModel');
+					$this->load->model('customModel');
 
 					$this->db->join('users', 'blog.id_user = users.id', 'left');
-					$model = $this->blogModel->search(null, $this->limit, $offset);
+					//$model = $this->blogModel->search(null, $this->limit, $offset);
+					//$model = $this->customModel->get_blogs($this->limit, $offset)->result();
+					$model = $this->customModel->get_blogs(10, $offset)->result();
 					$count = $this->blogModel->count();
 					$template_data = [
 						'model' => $model,

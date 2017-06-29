@@ -103,10 +103,10 @@
 					</div>
 				</div><!--end of container-->
 				<div>
-					<font color="black"><marquee style="background-color:rgb(168, 255, 132);"><p>
+					<font color="black"><marquee style="background-color:rgb(255, 255, 255, 0.4);"><p>
 						<?php $runningtext = $this->db->query("SELECT content FROM running_text Where status='publish' and waktu_publish <= now() and (waktu_berakhir >= now() or waktu_berakhir is null)")->result(); ?>
 								<?php foreach ($runningtext as $k => $v): echo $k != 0 ? ' ' : ''; 
-								echo $v->content; endforeach ?>
+								echo $v->content.'&nbsp;&nbsp;&nbsp;&nbsp;'; endforeach ?>
 					</p></marquee></font>
 				</div>
 				
