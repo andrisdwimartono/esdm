@@ -147,13 +147,9 @@ function sudah_login(){
 	<div class="row">
 		<div class="span6 offset2">
 			<form method="post" action="" id="formpesan" class="form-inline">
-			<input class="input-xlarge" name="pesan" type="text" placeholder="Ketik Pesan kemudian Enter !" required x-moz-errormessage="Ketik pesannya gan !">
+			<input class="input-xlarge" name="pesan" type="text" placeholder="Your text here!" required x-moz-errormessage="Please type here!">
 			<input type='submit' value='Send' class='btn btn-info pull-right' id='pencet'>
 			</form>
-		<audio controls id="suara">
-		<source src="../Nge_Chat/chat.mp3" type="audio/mpeg">
-		Your browser does not support the audio element.
-		</audio>
 		</div>
 
 	</div>
