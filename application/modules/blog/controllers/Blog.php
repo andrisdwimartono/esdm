@@ -689,7 +689,7 @@ class Blog extends MX_Controller
 	
 	public function search($offset=0)
     {
-		$search=$this->input->get("search");
+		$search=$this->input->get("search"); 
         $this->load->library('pagination');
         $this->load->model('blogModel');
         $this->load->model('categoryModel');
