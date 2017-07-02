@@ -624,6 +624,13 @@ class Admin extends MX_Controller
      **/
     public function page($slug)
     {
+		
+		$this->config->base_url();
+		if($slug=='chat'){
+			redirect (site_url().'chat/index.php');
+			die;
+		}
+//		echo $slug;die;
         last_url('set'); // save last url
         $this->db->where('slug', $slug);
         $data['content'] = $this->db->get('page')->row();
