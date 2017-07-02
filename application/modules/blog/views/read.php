@@ -61,6 +61,8 @@
 								$accepting = '<br><a class="comment-ok" href="../../../blog/accept_comment/'.$comment->comment_id.'/'.$comment->id_blog.'/accepted">Accept</a>';
 							}elseif($this->ion_auth->logged_in() && $comment->comment_state == 'accepted'){
 								$accepting = '<br><a class="comment-no" href="../../../blog/accept_comment/'.$comment->comment_id.'/'.$comment->id_blog.'/deleted">Delete</a><a class="comment-reply" id="reply-comment-'.$comment->comment_id.'" href="#rep" onclick="document.getElementById(\'reply-comment-form-'.$comment->comment_id.'\').style.display = \'unset\';">Reply</a>';
+							}elseif($comment->comment_state == 'accepted'){
+								$accepting = '<br><a class="comment-reply" id="reply-comment-'.$comment->comment_id.'" href="#rep" onclick="document.getElementById(\'reply-comment-form-'.$comment->comment_id.'\').style.display = \'unset\';">Reply</a>';
 							}elseif($this->ion_auth->logged_in() && $comment->comment_state == 'waiting'){
 								$accepting = '<br><a class="comment-ok" href="../../../blog/accept_comment/'.$comment->comment_id.'/'.$comment->id_blog.'/accepted">Accept</a> <a class="comment-no" href="../../../blog/accept_comment/'.$comment->comment_id.'/'.$comment->id_blog.'/deleted">Delete</a>';
 							}
@@ -87,11 +89,11 @@
 							<div class="comment-form"  style="display:none;" id="reply-comment-form-<?php echo $comment->comment_id;?>">
 								<form action="../../insert_comment_reply/<?php echo $model->id_blog;?>" method="post">
 								<label>Balas Komentar</label>
-								<input class="form-name validate-required comment-input" type="text" placeholder="Nama" name="comment_name"><br>
-								<input class="form-email validate-required validate-email comment-input" type="text" placeholder="Email" name="comment_email"><br>
-								<input class="form-message validate-required" type="text" name="comment_message" placeholder="Pesan" style="height:125px;"><br>
+								<input class="form-name validate-required comment-input" type="text" placeholder="Nama" name="comment_name"<?php if($this->ion_auth->logged_in()){echo " value=\"".$this->ion_auth->user()->row()->full_name."\"";}?> maxlength="100">
+								<input class="form-email validate-required validate-email comment-input" type="text" placeholder="Email" name="comment_email"<?php if($this->ion_auth->logged_in()){echo " value=\"".$this->ion_auth->user()->row()->email."\"\"";}?> maxlength="100"><br>
+								<textarea name="comment_message" class="form-message validate-required" placeholder="Pesan"></textarea><br>
 								<input type="hidden" name="comment_parent" value="<?php echo $comment->comment_id;?>">
-								<div class="submit-comment"><input type="submit" class="send-form btn-filled" value="Kirim"></div>
+								<div class="submit-comment"><input type="button" class="comment-reply-cancel" value="Cancel" onclick="document.getElementById('reply-comment-form-<?php echo $comment->comment_id;?>').style.display = 'none';"> <input type="submit" class="send-form btn-filled" value="Kirim"></div>
 								<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
 								</form>
 							</div>
@@ -135,9 +137,9 @@
 						<div class="comment-form">
 							<form action="../../insert_comment/<?php echo $model->id_blog;?>" method="post">
 							<label>Isi Komentar</label>
-							<input class="form-name validate-required comment-input" type="text" placeholder="Nama" name="comment_name">
-							<input class="form-email validate-required validate-email comment-input" type="text" placeholder="Email" name="comment_email">
-							<input class="form-message validate-required" type="text" name="comment_message" placeholder="Pesan" style="height:125px;">
+							<input class="form-name validate-required comment-input" type="text" placeholder="Nama" name="comment_name"<?php if($this->ion_auth->logged_in()){echo " value=\"".$this->ion_auth->user()->row()->full_name."\"";}?> maxlength="100">
+							<input class="form-email validate-required validate-email comment-input" type="text" placeholder="Email" name="comment_email"<?php if($this->ion_auth->logged_in()){echo " value=\"".$this->ion_auth->user()->row()->email."\"\"";}?> maxlength="100">
+							<textarea name="comment_message" class="form-message validate-required" placeholder="Pesan"></textarea>
 							<div class="submit-comment"><input type="submit" class="send-form btn-filled" value="Kirim"></div>
 							<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
 							</form>

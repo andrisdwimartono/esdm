@@ -144,7 +144,7 @@ class Admin extends MX_Controller
         $template = $this->admin_template;
         $this->output_view->output($template, $template_data);
     }
-
+	
     /**
      * Register page.
      *
@@ -152,9 +152,11 @@ class Admin extends MX_Controller
      **/
     public function register()
     {
-        if ($this->ion_auth->logged_in()) {
-            redirect('');
-        }
+		$this->output_view->auth();
+        // if ($this->ion_auth->logged_in()) {
+            // redirect('');
+        // }
+		
         $this->load->model('logs');
 
         if ($this->input->post('email')) {
@@ -669,23 +671,7 @@ class Admin extends MX_Controller
 				$template = $this->front_template;
 				//tambahan
 				if($data['content']->slug == 'home'){
-					$template = 'template/frontend_template_home';
-					//tambahan
-					$this->load->library('pagination');
-					$this->load->model('blogModel');
-					$this->load->model('categoryModel');
-					$this->load->model('customModel');
-
-					$this->db->join('users', 'blog.id_user = users.id', 'left');
-					//$model = $this->blogModel->search(null, $this->limit, $offset);
-					//$model = $this->customModel->get_blogs($this->limit, $offset)->result();
-					$model = $this->customModel->get_blogs(10, $offset)->result();
-					$count = $this->blogModel->count();
-					$template_data = [
-						'model' => $model,
-						'pagination' => $this->pagination->create_links()
-					];
-					$template_data['running_text'] = $this->RunningTextModel->getRunningText();
+					redirect('blog');
 					
 					
 					//tambahan

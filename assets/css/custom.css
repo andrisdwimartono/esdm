@@ -52,6 +52,16 @@
 	margin:5px 5px 5px 5px;
 	border-radius:5px;
 }
+.comment-reply-cancel{
+	border-style: solid;
+	border-color: #ff5b5b;
+	border-width: 2px;
+	background: #ffffff;
+	color: #ff5b5b;
+	padding:7px 70px 7px 70px;
+	margin:5px 5px 5px 5px;
+	border-radius:20px;
+}
 .comment-form{
 	border-style: dotted;
 	border-width: 0.5px 0px 0.5px 0px;

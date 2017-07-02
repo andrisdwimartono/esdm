@@ -38,6 +38,16 @@
 	<script src="assets/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
+<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+				  var js, fjs = d.getElementsByTagName(s)[0];
+				  if (d.getElementById(id)) return;
+				  js = d.createElement(s); js.id = id;
+				  js.src = "//connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.9";
+				  fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+		</script>
+				<!-- fb share jdk-->
     	<div class="loader">
     		<div class="spinner">
 			  <div class="double-bounce1"></div>
@@ -46,7 +56,7 @@
     	</div>
 				
 				<div class="nav-container">
-			<nav class="top-bar">
+			<nav class="top-bar overlay-bar">
 				<div class="container">
 				
 					<div class="row utility-menu">
@@ -85,6 +95,8 @@
 									<li><a href="<?php echo base_url($menu['link']) ?>"><?php echo $menu['label'] ?></a></li>
 <?php endif ?>
 <?php endforeach ?>
+<li>
+<?php echo '<form action="'.base_url().'blog/search" id="searching-blogs" method="get"><input type="text" id="search-blog" name="search" placeholder="Cari . . ." size="7" style="opacity:0.3;height:20px;border-radius:10px; border-color:#ffffff;" onclick="document.getElementById(\'search-blog\').style.cssText = \'background:#ffffff; color: #000000;\';"><a href="#" onclick="document.getElementById(\'searching-blogs\').submit();"><i class="fa fa-search" aria-hidden="true" style="color:#ffffff"></i></a></form>'; ?><input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>"></li>
 						</ul>
 						</div>
 					</div><!--end of row-->
@@ -94,6 +106,16 @@
 					</div>
 					
 				</div><!--end of container-->
+				<div>
+						<font color="black"><marquee style="background-color:rgb(255, 255, 255, 0.4);">
+							<p>
+								<?php if(count($running_text)>0){foreach($running_text as $rt){
+									echo $rt->content.'&nbsp;&nbsp;&nbsp;&nbsp;';
+								}}?>
+							</p>
+						</marquee></font>
+					</div>
+				
 			</nav>
 		</div>
 				
@@ -134,26 +156,26 @@
 			<?php echo $this->output_view->get_wrapper('page') ?>
 		</div>
 		<div class="footer-container">
-	<footer class="bg-primary short-2">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12">
-					<span class="text-white">&copy;<?php echo date('Y') ?> ESDM</span>
-					<span class="text-white"><a href="mailto:admin.esdm@jabarprov.go.id">admin.esdm@jabarprov.go.id</a></span>
-					<span class="text-white">+62 22 756 2049</span>
-					<span class="text-white">Jl. Soekarno-Hatta No. 576 Bandung</span>
+			<footer class="bg-primary short-2">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<span class="text-white">&copy;<?php echo date('Y') ?> ESDM</span>
+							<span class="text-white"><a href="mailto:admin.esdm@jabarprov.go.id">admin.esdm@jabarprov.go.id</a></span>
+							<span class="text-white">+62 22 756 2049</span>
+							<span class="text-white">Jl. Soekarno-Hatta No. 576 Bandung</span>
+						</div>
+					</div><!--end for row-->
+				</div><!--end of container-->
+				
+				<div class="contact-action">
+					<div class="align-vertical">
+						<i class="icon text-white icon_mail"></i>
+						<a href="<?php echo site_url('page/contact');?>" class="text-white"><span class="text-white">Hubungi Kami <i class="icon arrow_right"></i></span></a>
+					</div>
 				</div>
-			</div><!--end for row-->
-		</div><!--end of container-->
-		
-		<div class="contact-action">
-			<div class="align-vertical">
-				<i class="icon text-white icon_mail"></i>
-				<a href="<?php echo site_url('page/contact');?>" class="text-white"><span class="text-white">Hubungi Kami <i class="icon arrow_right"></i></span></a>
-			</div>
+			</footer>
 		</div>
-	</footer>
-</div>
 		
 		
 		<?php

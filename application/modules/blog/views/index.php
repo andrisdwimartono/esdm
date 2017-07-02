@@ -1,6 +1,45 @@
 <div class="main-container">
+<section class="hero-slider">
+				<ul class="slides">		
+					<li class="overlay">			
+						<div class="background-image-holder parallax-background">				
+							<img class="background-image" alt="Background Image" src="/esdm/assets/img/bg/hero15.jpg">			
+						</div>						
+						<div class="container align-vertical">				
+							<div class="row">					
+								<div class="col-md-6 col-sm-9">						
+									<h1 class="text-white">Dinas Energi dan Sumber Daya Mineral</h1>					
+								</div>				
+							</div>			
+						</div>		
+					</li>							
+					<li class="overlay">			
+						<div class="background-image-holder parallax-background">				
+							<img class="background-image" alt="Background Image" src="/esdm/assets/img/bg/hero7.jpg">			
+						</div>						
+						<div class="container align-vertical">				
+							<div class="row">					
+								<div class="col-md-6 col-sm-9">						
+									<h1 class="text-white">Dinas Energi dan Sumber Daya Mineral</h1>					
+								</div>	
+							</div>	
+						</div>		
+					</li>							
+					<li class="overlay">			
+						<div class="background-image-holder parallax-background">				
+							<img class="background-image" alt="Background Image" src="/esdm/assets/img/bg/hero9.jpg">			
+						</div>						
+						<div class="container align-vertical">				
+							<div class="row">					
+								<div class="col-md-6 col-sm-9">						
+									<h1 class="text-white">Dinas Energi dan Sumber Daya Mineral</h1>					
+								</div>				
+							</div>			
+						</div>	
+					</li>
+				</ul>
+			</section>
 <section class="no-pad-bottom projects-gallery">
-
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 text-center">
@@ -16,10 +55,9 @@
 		<div class="container">
 			<div class="row">
 				<ul class="filters">
-					<li data-filter="*" <?php echo (($this->uri->segment(3) != "berita") && ($this->uri->segment(3) != "artikel") && ($this->uri->segment(3) != "informasi")) ? 'class="active"' : '';?>>Semua</li>
-					<li data-filter=".Berita" <?php echo $this->uri->segment(3) == "berita" ? 'class="active"' : '';?>>Berita</li>
-					<li data-filter=".Artikel"<?php echo $this->uri->segment(3) == "artikel" ? 'class="active"' : '';?>>Artikel</li>
-					<li data-filter=".Informasi"<?php echo $this->uri->segment(3) == "informasi" ? 'class="active"' : '';?>>Informasi</li>
+					<?php $categories = $this->db->query("SELECT category FROM category")->result(); ?>
+					<?php foreach ($categories as $k => $v): echo $k != 0 ? ' ' : ''; echo '<li data-filter=".'.$v->category.'">'.$v->category.'</li>'; endforeach ?>
+					<li data-filter="*" class="active">Semua</li>
 				</ul>
 			</div>
 		</div>
@@ -34,16 +72,21 @@
 				<div class="hover-state">
 					<div class="align-vertical">
 						<h1 class="text-white"><strong><?php echo $value->title ?></strong></h1>
-						<p class="text-white"><!-- ?php echo $value->created_at  echo $value->username?-->
-							<?php echo strlen($value->content) > 50 ? substr($value->content, 0, 200) . '...' : $value->content ?>
-						</p>
 						<a href="<?php echo site_url('blog/read/' . $value->path . '/' . $value->id_blog) ?>" title="<?php echo $value->title ?>" class="btn btn-primary btn-white">Baca</a>
+						<p class="text-white"><!-- ?php echo $value->created_at  echo $value->username?-->
+							<?php 
+							echo strlen($value->content) > 50 ? substr(strip_tags($value->content), 0, 200) . '...' : strip_tags($value->content) ?>
+						</p>
+						
 					</div>
 				</div>
 			</div>
 		<?php endforeach ?>
-		<?php echo $pagination ?>
+		
 		</div>
 	</div>
+		<div class="text-center">
+			<?php echo $pagination ?>
+		</div>
 </section>
 </div>

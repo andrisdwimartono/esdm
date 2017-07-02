@@ -62,6 +62,21 @@ class Manageblog extends CI_Controller
         $this->load->view('template/template_new_blog', $template_data);
 	}
 	
+	public function newOpini(){
+		$this->load->model('blogModel');
+    	$this->load->model('categoryModel');
+		$this->load->model('commentModel');
+		
+    	
+    	$data = array();
+
+        $this->output_view->set_title('Opini');
+        $this->output_view->set_wrapper('page', 'template/template_new_opini', $data);
+        $this->output_view->output('template/front_template');
+		
+        //$this->load->view('template/template_new_opini', $template_data);
+	}
+	
 	
 	public function insert_blog(){
 		$fieldblog = array();

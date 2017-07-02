@@ -94,6 +94,8 @@
 									<li><a href="<?php echo base_url($menu['link']) ?>"><?php echo $menu['label'] ?></a></li>
 <?php endif ?>
 <?php endforeach ?>
+<li>
+<?php echo '<form action="'.base_url().'blog/search" id="searching-blogs" method="get"><input type="text" id="search-blog" name="search" placeholder="Cari . . ." size="7" style="opacity:0.3;height:20px;border-radius:10px; border-color:#ffffff;" onclick="document.getElementById(\'search-blog\').style.cssText = \'background:#ffffff; color: #000000;\';"><a href="#" onclick="document.getElementById(\'searching-blogs\').submit();"><i class="fa fa-search" aria-hidden="true" style="color:#ffffff"></i></a></form>'; ?><input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>"></li>
 						</ul>
 						</div>
 					</div><!--end of row-->
